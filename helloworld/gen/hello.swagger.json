@@ -1,0 +1,284 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "hello.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Hello"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v3/pay/transactions/out-trade-no/{outTradeNo}": {
+      "get": {
+        "operationId": "Hello_GetKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/helloworldResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "outTradeNo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mchid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Hello"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "PromotionDetialSCOPE": {
+      "type": "string",
+      "enum": [
+        "GLOBAL",
+        "SINGLE"
+      ],
+      "default": "GLOBAL"
+    },
+    "PromotionDetialTYPE": {
+      "type": "string",
+      "enum": [
+        "CASH",
+        "NOCASH"
+      ],
+      "default": "CASH"
+    },
+    "ResponseTradeState": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "REFUND",
+        "NOTPAY",
+        "CLOSED",
+        "REVOKED",
+        "USERPAYING",
+        "PAYERROR"
+      ],
+      "default": "SUCCESS"
+    },
+    "ResponseTradeType": {
+      "type": "string",
+      "enum": [
+        "JSAPI",
+        "NATIVE",
+        "APP",
+        "MICROPAY",
+        "MWEB",
+        "FACEPAY"
+      ],
+      "default": "JSAPI"
+    },
+    "helloworldAmount": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "payerTotal": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "payerCurrency": {
+          "type": "string"
+        }
+      }
+    },
+    "helloworldGoodsDetail": {
+      "type": "object",
+      "properties": {
+        "goodsId": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "string",
+          "format": "int64"
+        },
+        "unitPrice": {
+          "type": "string",
+          "format": "int64"
+        },
+        "discountAmount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "goodsRemark": {
+          "type": "string"
+        }
+      }
+    },
+    "helloworldPayer": {
+      "type": "object",
+      "properties": {
+        "openid": {
+          "type": "string"
+        }
+      }
+    },
+    "helloworldPromotionDetial": {
+      "type": "object",
+      "properties": {
+        "couponId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/PromotionDetialSCOPE"
+        },
+        "type": {
+          "$ref": "#/definitions/PromotionDetialTYPE"
+        },
+        "amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stockId": {
+          "type": "string"
+        },
+        "wechatpayContribute": {
+          "type": "string",
+          "format": "int64"
+        },
+        "merchantContribute": {
+          "type": "string",
+          "format": "int64"
+        },
+        "otherContribute": {
+          "type": "string",
+          "format": "int64"
+        },
+        "currency": {
+          "type": "string",
+          "title": "only CNY"
+        },
+        "goodsDetail": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/helloworldGoodsDetail"
+          },
+          "title": "referring to https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_5.shtml"
+        }
+      }
+    },
+    "helloworldResponse": {
+      "type": "object",
+      "properties": {
+        "appid": {
+          "type": "string"
+        },
+        "mchid": {
+          "type": "string",
+          "title": "mchid same as Request"
+        },
+        "outTradeNo": {
+          "type": "string"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "tradeType": {
+          "$ref": "#/definitions/ResponseTradeType"
+        },
+        "tradeState": {
+          "$ref": "#/definitions/ResponseTradeState"
+        },
+        "tradeStateDesc": {
+          "type": "string"
+        },
+        "bankType": {
+          "type": "string",
+          "title": "referring to https://pay.weixin.qq.com/wiki/doc/apiv3/terms_definition/chapter1_1_3.shtml#part-6"
+        },
+        "attach": {
+          "type": "string"
+        },
+        "successTime": {
+          "type": "string"
+        },
+        "payer": {
+          "$ref": "#/definitions/helloworldPayer"
+        },
+        "amount": {
+          "$ref": "#/definitions/helloworldAmount"
+        },
+        "sceneInfo": {
+          "$ref": "#/definitions/helloworldSceneInfo"
+        },
+        "promotionDetail": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/helloworldPromotionDetial"
+          },
+          "title": "referring to https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_5.shtml"
+        }
+      }
+    },
+    "helloworldSceneInfo": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

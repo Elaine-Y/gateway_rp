@@ -1,0 +1,5 @@
+grpc:
+  - name: hello                   # Name of grpc entry
+    port: 50000                      # Port of grpc entry
+    enabled: true                   # Enable grpc entry
+    enableReflection: true
