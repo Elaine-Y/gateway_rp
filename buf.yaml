@@ -3,3 +3,4 @@ name: github.com/Elaine-Y/gateway_rp
 build:
   roots:
     - helloworld
+    - third-party/googleapis

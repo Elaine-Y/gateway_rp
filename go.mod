@@ -4,7 +4,6 @@ go 1.17
 
 require (
 	github.com/golang/glog v1.0.0
-	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.1
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e
 	google.golang.org/grpc v1.44.0

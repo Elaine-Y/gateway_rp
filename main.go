@@ -1,53 +1,3 @@
-// package main
-
-// import (
-// 	"context"
-// 	"fmt"
-
-// 	hello "github.com/Elaine-Y/gateway_rp/helloworld/gen"
-// 	rkboot "github.com/rookie-ninja/rk-boot"
-// 	rkbootgrpc "github.com/rookie-ninja/rk-boot/grpc"
-// 	"google.golang.org/grpc"
-// )
-
-// // Application entrance.
-// func main() {
-// 	// Create a new boot instance.
-// 	boot := rkboot.NewBoot()
-
-// 	// ***************************************
-// 	// ******* Register GRPC & Gateway *******
-// 	// ***************************************
-
-// 	// Get grpc entry with name
-// 	grpcEntry := rkbootgrpc.GetGrpcEntry("hello")
-// 	// Register grpc registration function
-// 	grpcEntry.AddRegFuncGrpc(registerHello)
-// 	// Register grpc-gateway registration function
-// 	grpcEntry.AddRegFuncGw(hello.RegisterHelloHandlerFromEndpoint)
-
-// 	// Bootstrap
-// 	boot.Bootstrap(context.Background())
-
-// 	// Wait for shutdown sig
-// 	boot.WaitForShutdownSig(context.Background())
-// }
-
-// // Implementation of [type GrpcRegFunc func(server *grpc.Server)]
-// func registerHello(server *grpc.Server) {
-// 	hello.RegisterHelloServer(server, &HelloServer{})
-// }
-
-// // Implementation of grpc service defined in proto file
-// type HelloServer struct{}
-
-// func (server *HelloServer) GetKey(ctx context.Context, request *hello.Request) (*hello.Response, error) {
-// 	return &hello.Response{
-// 		Appid: fmt.Sprintf("Hello %s, mchid %s!", request.OutTradeNo, request.Mchid),
-// 	}, nil
-// }
-
-
 package main
 
 import (
@@ -63,7 +13,7 @@ import (
 )
 
 var (
-    echoEndpoint = flag.String("hello_endpoint", "localhost:50051", "endpoint of YourService")
+    echoEndpoint = flag.String("hello_endpoint", "localhost:50001", "endpoint of YourService")
 )
 
 func run() error {
@@ -78,7 +28,7 @@ func run() error {
         return err
     }
 
-    return http.ListenAndServe(":50000", mux)
+    return http.ListenAndServe(":8080", mux) //50000
 }
 
 func main() {
